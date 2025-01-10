@@ -19,8 +19,18 @@ Integração com ViaCEP:
 - Consulta automática de endereços com base no CEP fornecido.
 
 🛠️ Tecnologias Utilizadas
-Linguagem: Java
-Framework: Spring Boot
-Banco de Dados: PostgreSQL
-Ferramentas: Postman e Swagger (testes de API), Spring Security (autenticação)
-Integração Externa: ViaCEP API.
+
+Linguagem: 
+Java.
+
+Framework: 
+Spring Boot.
+
+Banco de Dados: 
+PostgreSQL.
+
+Ferramentas: 
+Postman e Swagger (testes de API), Spring Security (autenticação).
+
+Integração Externa: 
+ViaCEP API.
