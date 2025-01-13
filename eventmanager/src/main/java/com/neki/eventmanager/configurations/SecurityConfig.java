@@ -24,14 +24,8 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		return httpSecurity.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(request -> {
-			var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-			corsConfig.setAllowedOriginPatterns(List.of("*"));
-			corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-			corsConfig.setAllowedHeaders(List.of("*"));
-			corsConfig.setAllowCredentials(true);
-			return corsConfig;
-		})).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		return httpSecurity.csrf(csrf -> csrf.disable())
+			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/account/sign-in").permitAll()
 						.requestMatchers(HttpMethod.POST, "/account/sign-up").permitAll() // hasRole("ADMIN")
@@ -52,9 +46,4 @@ public class SecurityConfig {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-//	@Bean
-//	public RestTemplate restTemplate() {
-//		return new RestTemplate();
-//	}
 }
