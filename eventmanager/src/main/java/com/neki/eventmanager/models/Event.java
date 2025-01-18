@@ -26,7 +26,7 @@ public class Event {
 	@Column(name = "event_date")
 	private LocalDateTime eventDate;
 	@Column(name = "event_photo")
-	private String photoUrl; 	
+	private String photoUrl;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_address")
 	private Address address;
@@ -77,6 +77,7 @@ public class Event {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public LocalDateTime getRegisteredAt() {
 		return registeredAt;
 	}

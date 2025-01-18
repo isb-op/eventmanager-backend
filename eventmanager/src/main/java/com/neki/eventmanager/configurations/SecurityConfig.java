@@ -1,7 +1,5 @@
 package com.neki.eventmanager.configurations;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,19 +14,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.neki.eventmanager.cors.CorsConfig;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 	@Autowired
 	SecurityFilter securityFilter;
-	
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity.csrf(csrf -> csrf.disable())
-			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-						.requestMatchers(HttpMethod.POST, "/account/sign-in").permitAll()
-						.requestMatchers(HttpMethod.POST, "/account/sign-up").permitAll() // hasRole("ADMIN")
+				.cors(cors -> cors.configurationSource(new CorsConfig().corsConfigurationSource()))
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
+						.permitAll().requestMatchers(HttpMethod.POST, "/account/sign-in").permitAll()
+						.requestMatchers(HttpMethod.POST, "/account/sign-up").permitAll()
 						.requestMatchers(HttpMethod.POST, "/events/**").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.GET, "/events/**").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.PUT, "/events/**").hasRole("ADMIN")

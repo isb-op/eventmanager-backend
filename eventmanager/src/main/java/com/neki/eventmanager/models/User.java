@@ -144,7 +144,5 @@ public class User implements UserDetails {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-	
-	
 
 }

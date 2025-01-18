@@ -36,12 +36,4 @@ public class UserAuthorizationService implements UserDetailsService {
 		}
 		return user;
 	}
-
-	public boolean checkAdminRole(User user) {
-		return user.getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
-	}
-
-	public boolean isSameUser(User user, Long ownerId) {
-		return user.getIdUser().equals(ownerId);
-	}
 }

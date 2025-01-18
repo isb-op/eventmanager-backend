@@ -62,6 +62,8 @@ public class UserAuthenticationController {
 		if (!userRegisterDto.password().equals(userRegisterDto.passwordConfirmation())) {
 			throw new Error("Senhas não são iguais");
 		}
+		// Business model with automatically defined ADMIN Role requirement, however, it
+		// is possible to use other roles (USER and ADMIN).
 		User newUser = new User(userRegisterDto.name(), userRegisterDto.login(), encryptedPassword, Role.ADMIN);
 		newUser.setRegisteredAt(LocalDateTime.now());
 		this.userRepository.save(newUser);

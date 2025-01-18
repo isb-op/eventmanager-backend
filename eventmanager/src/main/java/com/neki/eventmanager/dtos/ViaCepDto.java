@@ -1,6 +1,5 @@
 package com.neki.eventmanager.dtos;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.neki.eventmanager.models.Address;
 
@@ -71,13 +70,9 @@ public class ViaCepDto {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-    public static ViaCepDto toDto(Address address) {
-        return new ViaCepDto(
-        		address.getPostalCode(),
-        		address.getStreet(),
-        		address.getNeighborhood(),
-        		address.getCity(),
-        		address.getState()
-        );
-    }
+
+	public static ViaCepDto toDto(Address address) {
+		return new ViaCepDto(address.getPostalCode(), address.getStreet(), address.getNeighborhood(), address.getCity(),
+				address.getState());
+	}
 }
